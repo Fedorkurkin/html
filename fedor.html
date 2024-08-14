@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документы Федора</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            color: #343a40;
+            margin: 0;
+            padding: 20px;
+        }
+        .document {
+            background: linear-gradient(to bottom, #ffffff, #f1f1f1);
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .document:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .document h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #007bff;
+        }
+        .details {
+            display: none;
+            padding-top: 10px;
+            border-top: 1px solid #dee2e6;
+            margin-top: 10px;
+        }
+        .signature {
+            display: block;
+            margin-top: 10px;
+            width: 150px; /* Установите нужный размер */
+            height: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="document" onclick="toggleDetails('passport-details')">
+        <h2>Паспорт</h2>
+        <div id="passport-details" class="details">
+            <p>Этот документ удостоверяет вашу личность и является важным свидетельством вашей гражданской принадлежности.</p>
+            <p><strong>Номер паспорта:</strong> 987654321</p>
+            <p><strong>Дата выдачи:</strong> 15.05.2018</p>
+            <p><em>Подпись:</em></p>
+            <img src="https://grizly.club/uploads/posts/2023-08/1692734570_grizly-club-p-kartinki-podpis-dlya-nalozheniya-bez-fona-26.jpg" alt="Подпись" class="signature">
+        </div>
+    </div>
+
+    <div class="document" onclick="toggleDetails('license-details')">
+        <h2>Права</h2>
+        <div id="license-details" class="details">
+            <p>Этот документ подтверждает ваше право на управление транспортным средством.</p>
+            <p><strong>Номер прав:</strong> 5566778899</p>
+            <p><strong>Дата выдачи:</strong> 25.12.2019</p>
+            <p><em>Подпись:</em></p>
+            <img src="https://grizly.club/uploads/posts/2023-08/1692734570_grizly-club-p-kartinki-podpis-dlya-nalozheniya-bez-fona-26.jpg" alt="Подпись" class="signature">
+        </div>
+    </div>
+
+    <div class="document" onclick="toggleDetails('techpassport-details')">
+        <h2>Техпаспорт</h2>
+        <div id="techpassport-details" class="details">
+            <p>Этот документ подтверждает технические характеристики вашего транспортного средства.</p>
+            <p><strong>Номер техпаспорта:</strong> 2233445566</p>
+            <p><strong>Дата выдачи:</strong> 10.10.2020</p>
+            <p><em>Подпись:</em></p>
+            <img src="https://grizly.club/uploads/posts/2023-08/1692734570_grizly-club-p-kartinki-podpis-dlya-nalozheniya-bez-fona-26.jpg" alt="Подпись" class="signature">
+        </div>
+    </div>
+
+    <div class="document" onclick="toggleDetails('gibdd-license-details')">
+        <h2>Лицензия на ГИБДД</h2>
+        <div id="gibdd-license-details" class="details">
+            <p>Этот документ подтверждает ваше право на управление транспортным средством и возможность останавливать машины.</p>
+            <p><strong>Номер лицензии:</strong> 3344556677</p>
+            <p><strong>Дата выдачи:</strong> 05.05.2021</p>
+            <p><em>Подпись:</em></p>
+            <img src="https://grizly.club/uploads/posts/2023-08/1692734570_grizly-club-p-kartinki-podpis-dlya-nalozheniya-bez-fona-26.jpg" alt="Подпись" class="signature">
+        </div>
+    </div>
+
+    <script>
+        function toggleDetails(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
