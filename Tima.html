@@ -3,82 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Документы Тима</title>
+    <title>Мои документы</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #f8f9fa, #e9ecef);
-            color: #343a40;
-            margin: 0;
+            background: linear-gradient(to right, #74ebd5, #9face6);
+            text-align: center;
             padding: 20px;
         }
         .document {
-            background: linear-gradient(to bottom, #ffffff, #f1f1f1);
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-block;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            width: 200px;
         }
-        .document:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        .license-list {
+            margin-top: 20px;
         }
-        .document h2 {
-            margin-top: 0;
-            font-size: 1.5em;
-            color: #007bff;
+        .license-item {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .details {
+        .add-license {
+            margin-top: 20px;
+        }
+        .modal {
             display: none;
-            padding-top: 10px;
-            border-top: 1px solid #dee2e6;
-            margin-top: 10px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            justify-content: center;
+            align-items: center;
         }
-        .signature {
-            display: block;
-            margin-top: 10px;
-            width: 150px; /* Установите нужный размер */
-            height: auto;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="document" onclick="toggleDetails('passport-details')">
-        <h2>Паспорт</h2>
-        <div id="passport-details" class="details">
-            <p>Этот документ удостоверяет вашу личность и является важным свидетельством вашей гражданской принадлежности.</p>
-            <p><strong>Номер паспорта:</strong> 123456789</p>
-            <p><strong>Дата выдачи:</strong> 01.01.2015</p>
-            <p><em>Подпись:</em></p>
-            <img src="https://grizly.club/uploads/posts/2023-08/1692734570_grizly-club-p-kartinki-podpis-dlya-nalozheniya-bez-fona-26.jpg" alt="Подпись" class="signature">
-        </div>
+
+    <h1>Мои документы</h1>
+
+    <div id="documents">
+        <div class="document" onclick="showDocument('passport')">Паспорт</div>
+        <div class="document" onclick="showDocument('techPassport')">Техпаспорт (номер машины: А476АМ76 марка машины: жигуль)</div>
+        <div class="document" onclick="showDocument('driverLicense')">Водительские права</div>
+
+    <h2>Лицензии</h2>
+    <div class="license-list" id="licenseList"></div>
+    
+    <div class="add-license">
+        <button onclick="openModal()">Добавить лицензию</button>
     </div>
 
-    <div class="document" onclick="toggleDetails('license-details')">
-        <h2>Права</h2>
-        <div id="license-details" class="details">
-            <p>Этот документ подтверждает ваше право на управление транспортным средством.</p>
-            <p><strong>Номер прав:</strong> 1122334455</p>
-            <p><strong>Дата выдачи:</strong> 20.07.2017</p>
-            <p><em>Подпись:</em></p>
-            <img src="https://grizly.club/uploads/posts/2023-08/1692734570_grizly-club-p-kartinki-podpis-dlya-nalozheniya-bez-fona-26.jpg" alt="Подпись" class="signature">
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3>Выберите профессию</h3>
+            <select id="professionSelect">
+                <option value="фермер">Ферма</option>
+                <option value="шахтер">Шахта</option>
+                <option value="рабочий">Завод</option>
+                <option value="бусник">Автобусник</option>
+                <option value="курьер">Курьер</option>
+                <option value="угонщик">Автоугон</option>
+                <option value="кладоискатель">Кладоискатель</option>
+                <option value="таксист">Таксист</option>
+                <option value="солдат">Армия</option>
+                <option value="журналист">СМИ</option>
+                <option value="чиновник">Правительство</option>
+                <option value="преступник">ОПГ</option>
+                <option value="исследователь">ФСИН</option>
+                <option value="полицейский">УМВД</option>
+                <option value="агент">ФСБ</option>
+                <option value="спасатель">МЧС</option>
+                <option value="крупье">Крупье в казино</option>
+                <option value="менеджер">Менеджер в Казино</option>
+                <option value="старшийСостав">Старший состав в любой организации</option>
+                <option value="строитель">Строитель</option>
+                <option value="замПрезидента">Зам в любой организации</option>
+                <option value="агентПоддержки">Агент поддержки</option>
+                <option value="лидер">Лидерство в организации</option>
+                <option value="дальнобойщик">Дальнобойщик</option>
+                <option value="инкассатор">Инкассатор</option>
+                <option value="водолаз">Водолаз</option>
+            </select>
+            <button onclick="addLicense()">Добавить лицензию</button>
+            <button onclick="closeModal()">Закрыть</button>
         </div>
     </div>
 
     <script>
-        function toggleDetails(id) {
-            var element = document.getElementById(id);
-            if (element.style.display === "none") {
-                element.style.display = "block";
-            } else {
-                element.style.display = "none";
+        const licenses = JSON.parse(localStorage.getItem('licenses')) || [];
+
+        function showDocument(doc) {
+            let docText;
+            switch (doc) {
+                case 'passport':
+                    docText = `Паспорт гражданина Российской Федерации. Серия: 1234, Номер: 567890, Выдан: УФМС России по городу Москве.`;
+                    break;
+                case 'techPassport':
+                    docText = `Технический паспорт автомобиля. Марка: ВАЗ, Модель: 2110, Год выпуска: 2005, VIN: XXXXXXXXXXXXXXXXXX.`;
+                    break;
+                case 'driverLicense':
+                    docText = `Водительское удостоверение. Серия: 9876, Номер: 543210, Выдан: ГИБДД России.`;
+                    break;
+                case 'gibddLicense':
+                    docText = `Лицензия на осуществление деятельности ГИБДД. Номер: 11223344, Дата выдачи: 01.01.2022.`;
+                    break;
+                default:
+                    docText = `Документ не найден.`;
             }
+            alert(docText);
         }
+
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function addLicense() {
+            const profession = document.getElementById('professionSelect').value;
+            const licenseText = `Лицензия для работы: ${profession}. Дата получения: ${new Date().toLocaleDateString()}.`;
+            licenses.push(licenseText);
+            localStorage.setItem('licenses', JSON.stringify(licenses));
+            renderLicenses();
+            closeModal();
+        }
+
+        function renderLicenses() {
+            const licenseList = document.getElementById('licenseList');
+            licenseList.innerHTML = '';
+            licenses.forEach((license, index) => {
+                const div = document.createElement('div');
+                div.classList.add('license-item');
+                div.innerHTML = `${license} <button onclick="deleteLicense(${index})">✖</button>`;
+                licenseList.appendChild(div);
+            });
+        }
+
+        function deleteLicense(index) {
+            licenses.splice(index, 1);
+            localStorage.setItem('licenses', JSON.stringify(licenses));
+            renderLicenses();
+        }
+
+        // Рендерим лицензии при загрузке страницы
+        window.onload = renderLicenses;
     </script>
+
 </body>
 </html>
