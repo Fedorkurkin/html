@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <style>
-    * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -130,50 +130,6 @@ button.admin-only:hover {
     background-color: #d32f2f;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 5px;
-    width: 400px;
-    max-width: 90%;
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input, .form-group select {
-    width: 100%;
-    padding: 8px;
-}
-
 .admin-sections {
     display: flex;
     gap: 20px;
@@ -203,8 +159,6 @@ button.admin-only:hover {
     color: #4CAF50;
 }
 </style>
-
-    
 <body>
     <div class="container">
         <header>
@@ -212,8 +166,8 @@ button.admin-only:hover {
             <div id="user-info">
                 <span id="username-display">Гость</span>
                 <button id="logout-btn" style="display: none;">Выйти</button>
-                <button id="login-btn">Войти</button>
-                <button id="register-btn">Регистрация</button>
+                <a href="login.html" id="login-btn" class="btn">Войти</a>
+                <a href="register.html" id="register-btn" class="btn">Регистрация</a>
             </div>
         </header>
 
@@ -290,7 +244,7 @@ button.admin-only:hover {
                     <select id="subject-filter">
                         <option value="">Все предметы</option>
                     </select>
-                    <button id="add-grade-btn">Добавить оценку</button>
+                    <a href="add-grade.html" id="add-grade-btn" class="btn">Добавить оценку</a>
                 </div>
                 <table id="grades-table">
                     <thead>
@@ -371,679 +325,398 @@ button.admin-only:hover {
                 </div>
             </div>
         </div>
-
-        <!-- Модальные окна -->
-        <div id="login-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Вход в систему</h2>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="login-username">Логин:</label>
-                        <input type="text" id="login-username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">Пароль:</label>
-                        <input type="password" id="login-password" required>
-                    </div>
-                    <button type="submit">Войти</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="register-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Регистрация</h2>
-                <form id="register-form">
-                    <div class="form-group">
-                        <label for="reg-username">Логин:</label>
-                        <input type="text" id="reg-username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-password">Пароль:</label>
-                        <input type="password" id="reg-password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-role">Роль:</label>
-                        <select id="reg-role" required>
-                            <option value="student">Ученик</option>
-                            <option value="teacher">Учитель</option>
-                        </select>
-                    </div>
-                    <div id="student-fields">
-                        <div class="form-group">
-                            <label for="reg-fullname">ФИО:</label>
-                            <input type="text" id="reg-fullname">
-                        </div>
-                        <div class="form-group">
-                            <label for="reg-class">Класс:</label>
-                            <input type="text" id="reg-class">
-                        </div>
-                        <div class="form-group">
-                            <label for="reg-birthdate">Дата рождения:</label>
-                            <input type="date" id="reg-birthdate">
-                        </div>
-                    </div>
-                    <div id="teacher-fields" style="display: none;">
-                        <div class="form-group">
-                            <label for="reg-teacher-name">ФИО:</label>
-                            <input type="text" id="reg-teacher-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="reg-subject">Предмет:</label>
-                            <input type="text" id="reg-subject">
-                        </div>
-                    </div>
-                    <button type="submit">Зарегистрироваться</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="add-grade-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Добавить оценку</h2>
-                <form id="grade-form">
-                    <div class="form-group">
-                        <label for="grade-student">Ученик:</label>
-                        <select id="grade-student" required></select>
-                    </div>
-                    <div class="form-group">
-                        <label for="grade-subject">Предмет:</label>
-                        <select id="grade-subject" required></select>
-                    </div>
-                    <div class="form-group">
-                        <label for="grade-value">Оценка:</label>
-                        <select id="grade-value" required>
-                            <option value="5">5 (Отлично)</option>
-                            <option value="4">4 (Хорошо)</option>
-                            <option value="3">3 (Удовлетворительно)</option>
-                            <option value="2">2 (Неудовлетворительно)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="grade-date">Дата:</label>
-                        <input type="date" id="grade-date" required>
-                    </div>
-                    <button type="submit">Добавить</button>
-                </form>
-            </div>
-        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация данных
-    const adminUser = {
-        id: 1,
-        username: 'admin',
-        password: 'admin123',
-        role: 'admin'
-    };
-
-    let users = JSON.parse(localStorage.getItem('users')) || [adminUser];
-    let students = JSON.parse(localStorage.getItem('students')) || [];
-    let teachers = JSON.parse(localStorage.getItem('teachers')) || [];
-    let grades = JSON.parse(localStorage.getItem('grades')) || [];
-    let schedule = JSON.parse(localStorage.getItem('schedule')) || [];
-    let subjects = ['Математика', 'Русский язык', 'Литература', 'Физика', 'Химия', 'Биология', 'История', 'География', 'Английский язык', 'Физкультура', 'Информатика'];
-    let classes = ['5А', '5Б', '6А', '6Б', '7А', '7Б', '8А', '8Б', '9А', '9Б', '10А', '10Б', '11А', '11Б'];
-
-    let currentUser = null;
-
-    // DOM элементы
-    const loginBtn = document.getElementById('login-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const registerBtn = document.getElementById('register-btn');
-    const usernameDisplay = document.getElementById('username-display');
-    const userRoleInfo = document.getElementById('user-role-info');
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    const loginModal = document.getElementById('login-modal');
-    const registerModal = document.getElementById('register-modal');
-    const addGradeModal = document.getElementById('add-grade-modal');
-    const closeButtons = document.querySelectorAll('.close');
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const gradeForm = document.getElementById('grade-form');
-    const regRoleSelect = document.getElementById('reg-role');
-    const studentFields = document.getElementById('student-fields');
-    const teacherFields = document.getElementById('teacher-fields');
-    const addStudentBtn = document.getElementById('add-student-btn');
-    const addTeacherBtn = document.getElementById('add-teacher-btn');
-    const addGradeBtn = document.getElementById('add-grade-btn');
-    const studentsList = document.getElementById('students-list');
-    const teachersList = document.getElementById('teachers-list');
-    const gradesList = document.getElementById('grades-list');
-    const scheduleList = document.getElementById('schedule-list');
-    const usersList = document.getElementById('users-list');
-    const classFilter = document.getElementById('class-filter');
-    const subjectFilter = document.getElementById('subject-filter');
-    const scheduleClassFilter = document.getElementById('schedule-class-filter');
-    const scheduleDayFilter = document.getElementById('schedule-day-filter');
-    const gradeStudentSelect = document.getElementById('grade-student');
-    const gradeSubjectSelect = document.getElementById('grade-subject');
-    const totalStudentsSpan = document.getElementById('total-students');
-    const totalTeachersSpan = document.getElementById('total-teachers');
-    const totalGradesSpan = document.getElementById('total-grades');
-
-    // Инициализация интерфейса
-    initInterface();
-
-    // Обработчики событий
-    loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
-    logoutBtn.addEventListener('click', logout);
-    registerBtn.addEventListener('click', () => registerModal.style.display = 'block');
-    
-    closeButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            this.closest('.modal').style.display = 'none';
-        });
-    });
-
-    window.addEventListener('click', function(event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = 'none';
-        }
-    });
-
-    tabButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            switchTab(tabId);
-        });
-    });
-
-    regRoleSelect.addEventListener('change', function() {
-        if (this.value === 'student') {
-            studentFields.style.display = 'block';
-            teacherFields.style.display = 'none';
-        } else {
-            studentFields.style.display = 'none';
-            teacherFields.style.display = 'block';
-        }
-    });
-
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const username = document.getElementById('login-username').value;
-        const password = document.getElementById('login-password').value;
-        
-        const user = users.find(u => u.username === username && u.password === password);
-        
-        if (user) {
-            currentUser = user;
-            updateUI();
-            loginModal.style.display = 'none';
-            loginForm.reset();
-        } else {
-            alert('Неверный логин или пароль');
-        }
-    });
-
-    registerForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const username = document.getElementById('reg-username').value;
-        const password = document.getElementById('reg-password').value;
-        const role = document.getElementById('reg-role').value;
-        
-        if (users.some(u => u.username === username)) {
-            alert('Пользователь с таким логином уже существует');
-            return;
-        }
-        
-        const newUser = {
-            id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
-            username,
-            password,
-            role
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализация данных
+        const adminUser = {
+            id: 1,
+            username: 'admin',
+            password: 'admin123',
+            role: 'admin'
         };
-        
-        users.push(newUser);
-        saveUsers();
-        
-        if (role === 'student') {
-            const fullname = document.getElementById('reg-fullname').value;
-            const classNum = document.getElementById('reg-class').value;
-            const birthdate = document.getElementById('reg-birthdate').value;
-            
-            const newStudent = {
-                id: students.length > 0 ? Math.max(...students.map(s => s.id)) + 1 : 1,
-                userId: newUser.id,
-                fullname,
-                class: classNum,
-                birthdate
-            };
-            
-            students.push(newStudent);
-            saveStudents();
-        } else if (role === 'teacher') {
-            const fullname = document.getElementById('reg-teacher-name').value;
-            const subject = document.getElementById('reg-subject').value;
-            
-            const newTeacher = {
-                id: teachers.length > 0 ? Math.max(...teachers.map(t => t.id)) + 1 : 1,
-                userId: newUser.id,
-                fullname,
-                subject,
-                classTeacher: ''
-            };
-            
-            teachers.push(newTeacher);
-            saveTeachers();
-        }
-        
-        alert('Регистрация успешна! Теперь вы можете войти.');
-        registerModal.style.display = 'none';
-        registerForm.reset();
-    });
 
-    gradeForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const studentId = parseInt(gradeStudentSelect.value);
-        const subject = gradeSubjectSelect.value;
-        const value = parseInt(gradeValue.value);
-        const date = gradeDate.value;
-        
-        const student = students.find(s => s.id === studentId);
-        const teacher = teachers.find(t => t.userId === currentUser.id);
-        
-        if (!student || !teacher) {
-            alert('Ошибка при добавлении оценки');
-            return;
-        }
-        
-        const newGrade = {
-            id: grades.length > 0 ? Math.max(...grades.map(g => g.id)) + 1 : 1,
-            studentId,
-            studentName: student.fullname,
-            subject,
-            value,
-            date,
-            teacherId: teacher.id,
-            teacherName: teacher.fullname
-        };
-        
-        grades.push(newGrade);
-        saveGrades();
-        renderGrades();
-        addGradeModal.style.display = 'none';
-        gradeForm.reset();
-    });
+        let users = JSON.parse(localStorage.getItem('users')) || [adminUser];
+        let students = JSON.parse(localStorage.getItem('students')) || [];
+        let teachers = JSON.parse(localStorage.getItem('teachers')) || [];
+        let grades = JSON.parse(localStorage.getItem('grades')) || [];
+        let schedule = JSON.parse(localStorage.getItem('schedule')) || [];
+        let subjects = ['Математика', 'Русский язык', 'Литература', 'Физика', 'Химия', 'Биология', 'История', 'География', 'Английский язык', 'Физкультура', 'Информатика'];
+        let classes = ['5А', '5Б', '6А', '6Б', '7А', '7Б', '8А', '8Б', '9А', '9Б', '10А', '10Б', '11А', '11Б'];
 
-    addStudentBtn.addEventListener('click', function() {
-        // Здесь можно добавить функционал для добавления учеников через админку
-        alert('Функция добавления ученика через админку');
-    });
+        // Проверяем, есть ли текущий пользователь в localStorage
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 
-    addTeacherBtn.addEventListener('click', function() {
-        // Здесь можно добавить функционал для добавления учителей через админку
-        alert('Функция добавления учителя через админку');
-    });
+        // DOM элементы
+        const logoutBtn = document.getElementById('logout-btn');
+        const usernameDisplay = document.getElementById('username-display');
+        const userRoleInfo = document.getElementById('user-role-info');
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        const addStudentBtn = document.getElementById('add-student-btn');
+        const addTeacherBtn = document.getElementById('add-teacher-btn');
+        const studentsList = document.getElementById('students-list');
+        const teachersList = document.getElementById('teachers-list');
+        const gradesList = document.getElementById('grades-list');
+        const scheduleList = document.getElementById('schedule-list');
+        const usersList = document.getElementById('users-list');
+        const classFilter = document.getElementById('class-filter');
+        const subjectFilter = document.getElementById('subject-filter');
+        const scheduleClassFilter = document.getElementById('schedule-class-filter');
+        const scheduleDayFilter = document.getElementById('schedule-day-filter');
+        const totalStudentsSpan = document.getElementById('total-students');
+        const totalTeachersSpan = document.getElementById('total-teachers');
+        const totalGradesSpan = document.getElementById('total-grades');
 
-    addGradeBtn.addEventListener('click', function() {
-        if (!currentUser) {
-            alert('Для добавления оценок необходимо войти в систему');
-            return;
-        }
-        
-        // Заполняем выпадающие списки
-        gradeStudentSelect.innerHTML = '';
-        students.forEach(student => {
-            const option = document.createElement('option');
-            option.value = student.id;
-            option.textContent = `${student.fullname} (${student.class})`;
-            gradeStudentSelect.appendChild(option);
-        });
-        
-        gradeSubjectSelect.innerHTML = '';
-        subjects.forEach(subject => {
-            const option = document.createElement('option');
-            option.value = subject;
-            option.textContent = subject;
-            gradeSubjectSelect.appendChild(option);
-        });
-        
-        document.getElementById('grade-date').valueAsDate = new Date();
-        addGradeModal.style.display = 'block';
-    });
+        // Инициализация интерфейса
+        initInterface();
 
-    classFilter.addEventListener('change', renderGrades);
-    subjectFilter.addEventListener('change', renderGrades);
-    scheduleClassFilter.addEventListener('change', renderSchedule);
-    scheduleDayFilter.addEventListener('change', renderSchedule);
-
-    // Функции
-    function initInterface() {
-        // Заполняем фильтры
-        classFilter.innerHTML = '<option value="">Все классы</option>';
-        classes.forEach(cls => {
-            const option = document.createElement('option');
-            option.value = cls;
-            option.textContent = cls;
-            classFilter.appendChild(option);
-        });
+        // Обработчики событий
+        logoutBtn.addEventListener('click', logout);
         
-        subjectFilter.innerHTML = '<option value="">Все предметы</option>';
-        subjects.forEach(subj => {
-            const option = document.createElement('option');
-            option.value = subj;
-            option.textContent = subj;
-            subjectFilter.appendChild(option);
-        });
-        
-        scheduleClassFilter.innerHTML = '<option value="">Выберите класс</option>';
-        classes.forEach(cls => {
-            const option = document.createElement('option');
-            option.value = cls;
-            option.textContent = cls;
-            scheduleClassFilter.appendChild(option);
-        });
-        
-        // Загружаем данные
-        renderStudents();
-        renderTeachers();
-        renderGrades();
-        renderSchedule();
-        renderUsers();
-        updateStats();
-        
-        // Проверяем авторизацию при загрузке
-        checkAuth();
-    }
-
-    function checkAuth() {
-        // Здесь можно добавить проверку авторизации из localStorage
-        updateUI();
-    }
-
-    function updateUI() {
-        if (currentUser) {
-            usernameDisplay.textContent = currentUser.username;
-            loginBtn.style.display = 'none';
-            registerBtn.style.display = 'none';
-            logoutBtn.style.display = 'inline-block';
-            
-            // Показываем/скрываем админские элементы
-            const adminElements = document.querySelectorAll('.admin-only');
-            adminElements.forEach(el => {
-                el.style.display = currentUser.role === 'admin' ? 'block' : 'none';
-            });
-            
-            // Обновляем информацию о роли
-            let roleText = '';
-            if (currentUser.role === 'admin') {
-                roleText = 'Вы вошли как администратор';
-            } else if (currentUser.role === 'teacher') {
-                const teacher = teachers.find(t => t.userId === currentUser.id);
-                roleText = `Вы вошли как учитель: ${teacher ? teacher.fullname : ''}`;
-            } else if (currentUser.role === 'student') {
-                const student = students.find(s => s.userId === currentUser.id);
-                roleText = `Вы вошли как ученик: ${student ? student.fullname : ''} (${student ? student.class : ''})`;
-            }
-            
-            userRoleInfo.innerHTML = `<p><strong>${roleText}</strong></p>`;
-        } else {
-            usernameDisplay.textContent = 'Гость';
-            loginBtn.style.display = 'inline-block';
-            registerBtn.style.display = 'inline-block';
-            logoutBtn.style.display = 'none';
-            
-            // Скрываем админские элементы
-            const adminElements = document.querySelectorAll('.admin-only');
-            adminElements.forEach(el => {
-                el.style.display = 'none';
-            });
-            
-            userRoleInfo.innerHTML = '<p>Вы не авторизованы. Для доступа ко всем функциям войдите в систему.</p>';
-        }
-    }
-
-    function logout() {
-        currentUser = null;
-        updateUI();
-        switchTab('home');
-    }
-
-    function switchTab(tabId) {
-        // Скрываем все вкладки
-        tabPanes.forEach(pane => {
-            pane.classList.remove('active');
-        });
-        
-        // Убираем активный класс у всех кнопок
         tabButtons.forEach(btn => {
-            btn.classList.remove('active');
+            btn.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                switchTab(tabId);
+            });
         });
-        
-        // Показываем нужную вкладку
-        document.getElementById(tabId).classList.add('active');
-        
-        // Делаем кнопку активной
-        document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
-        
-        // Обновляем данные на вкладке при необходимости
-        if (tabId === 'students') {
+
+        classFilter.addEventListener('change', renderGrades);
+        subjectFilter.addEventListener('change', renderGrades);
+        scheduleClassFilter.addEventListener('change', renderSchedule);
+        scheduleDayFilter.addEventListener('change', renderSchedule);
+
+        // Функции
+        function initInterface() {
+            // Заполняем фильтры
+            classFilter.innerHTML = '<option value="">Все классы</option>';
+            classes.forEach(cls => {
+                const option = document.createElement('option');
+                option.value = cls;
+                option.textContent = cls;
+                classFilter.appendChild(option);
+            });
+            
+            subjectFilter.innerHTML = '<option value="">Все предметы</option>';
+            subjects.forEach(subj => {
+                const option = document.createElement('option');
+                option.value = subj;
+                option.textContent = subj;
+                subjectFilter.appendChild(option);
+            });
+            
+            scheduleClassFilter.innerHTML = '<option value="">Выберите класс</option>';
+            classes.forEach(cls => {
+                const option = document.createElement('option');
+                option.value = cls;
+                option.textContent = cls;
+                scheduleClassFilter.appendChild(option);
+            });
+            
+            // Загружаем данные
             renderStudents();
-        } else if (tabId === 'teachers') {
             renderTeachers();
-        } else if (tabId === 'grades') {
             renderGrades();
-        } else if (tabId === 'schedule') {
             renderSchedule();
-        } else if (tabId === 'admin') {
             renderUsers();
             updateStats();
+            
+            // Проверяем авторизацию при загрузке
+            checkAuth();
         }
-    }
 
-    function renderStudents() {
-        studentsList.innerHTML = '';
-        students.forEach(student => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${student.id}</td>
-                <td>${student.fullname}</td>
-                <td>${student.class}</td>
-                <td>${student.birthdate}</td>
-                <td class="admin-only" style="display: ${currentUser?.role === 'admin' ? 'table-cell' : 'none'}">
-                    <button class="edit-btn" data-id="${student.id}">✏️</button>
-                    <button class="delete-btn" data-id="${student.id}">🗑️</button>
-                </td>
-            `;
-            studentsList.appendChild(tr);
-        });
-    }
+        function checkAuth() {
+            updateUI();
+        }
 
-    function renderTeachers() {
-        teachersList.innerHTML = '';
-        teachers.forEach(teacher => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${teacher.id}</td>
-                <td>${teacher.fullname}</td>
-                <td>${teacher.subject}</td>
-                <td>${teacher.classTeacher || '-'}</td>
-                <td class="admin-only" style="display: ${currentUser?.role === 'admin' ? 'table-cell' : 'none'}">
-                    <button class="edit-btn" data-id="${teacher.id}">✏️</button>
-                    <button class="delete-btn" data-id="${teacher.id}">🗑️</button>
-                </td>
-            `;
-            teachersList.appendChild(tr);
-        });
-    }
+        function updateUI() {
+            if (currentUser) {
+                usernameDisplay.textContent = currentUser.username;
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('register-btn').style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+                
+                // Показываем/скрываем админские элементы
+                const adminElements = document.querySelectorAll('.admin-only');
+                adminElements.forEach(el => {
+                    el.style.display = currentUser.role === 'admin' ? 'block' : 'none';
+                });
+                
+                // Обновляем информацию о роли
+                let roleText = '';
+                if (currentUser.role === 'admin') {
+                    roleText = 'Вы вошли как администратор';
+                } else if (currentUser.role === 'teacher') {
+                    const teacher = teachers.find(t => t.userId === currentUser.id);
+                    roleText = `Вы вошли как учитель: ${teacher ? teacher.fullname : ''}`;
+                } else if (currentUser.role === 'student') {
+                    const student = students.find(s => s.userId === currentUser.id);
+                    roleText = `Вы вошли как ученик: ${student ? student.fullname : ''} (${student ? student.class : ''})`;
+                }
+                
+                userRoleInfo.innerHTML = `<p><strong>${roleText}</strong></p>`;
+            } else {
+                usernameDisplay.textContent = 'Гость';
+                document.getElementById('login-btn').style.display = 'inline-block';
+                document.getElementById('register-btn').style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+                
+                // Скрываем админские элементы
+                const adminElements = document.querySelectorAll('.admin-only');
+                adminElements.forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                userRoleInfo.innerHTML = '<p>Вы не авторизованы. Для доступа ко всем функциям войдите в систему.</p>';
+            }
+        }
 
-    function renderGrades() {
-        const classFilterValue = classFilter.value;
-        const subjectFilterValue = subjectFilter.value;
-        
-        let filteredGrades = [...grades];
-        
-        if (classFilterValue) {
-            filteredGrades = filteredGrades.filter(grade => {
-                const student = students.find(s => s.id === grade.studentId);
-                return student && student.class === classFilterValue;
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateUI();
+            switchTab('home');
+        }
+
+        function switchTab(tabId) {
+            // Скрываем все вкладки
+            tabPanes.forEach(pane => {
+                pane.classList.remove('active');
+            });
+            
+            // Убираем активный класс у всех кнопок
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Показываем нужную вкладку
+            document.getElementById(tabId).classList.add('active');
+            
+            // Делаем кнопку активной
+            document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+            
+            // Обновляем данные на вкладке при необходимости
+            if (tabId === 'students') {
+                renderStudents();
+            } else if (tabId === 'teachers') {
+                renderTeachers();
+            } else if (tabId === 'grades') {
+                renderGrades();
+            } else if (tabId === 'schedule') {
+                renderSchedule();
+            } else if (tabId === 'admin') {
+                renderUsers();
+                updateStats();
+            }
+        }
+
+        function renderStudents() {
+            studentsList.innerHTML = '';
+            students.forEach(student => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>${student.fullname}</td>
+                    <td>${student.class}</td>
+                    <td>${student.birthdate}</td>
+                    <td class="admin-only" style="display: ${currentUser?.role === 'admin' ? 'table-cell' : 'none'}">
+                        <button class="edit-btn" data-id="${student.id}">✏️</button>
+                        <button class="delete-btn" data-id="${student.id}">🗑️</button>
+                    </td>
+                `;
+                studentsList.appendChild(tr);
             });
         }
-        
-        if (subjectFilterValue) {
-            filteredGrades = filteredGrades.filter(grade => grade.subject === subjectFilterValue);
+
+        function renderTeachers() {
+            teachersList.innerHTML = '';
+            teachers.forEach(teacher => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${teacher.id}</td>
+                    <td>${teacher.fullname}</td>
+                    <td>${teacher.subject}</td>
+                    <td>${teacher.classTeacher || '-'}</td>
+                    <td class="admin-only" style="display: ${currentUser?.role === 'admin' ? 'table-cell' : 'none'}">
+                        <button class="edit-btn" data-id="${teacher.id}">✏️</button>
+                        <button class="delete-btn" data-id="${teacher.id}">🗑️</button>
+                    </td>
+                `;
+                teachersList.appendChild(tr);
+            });
         }
-        
-        gradesList.innerHTML = '';
-        filteredGrades.forEach(grade => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${grade.studentName}</td>
-                <td>${grade.subject}</td>
-                <td>${grade.value}</td>
-                <td>${grade.date}</td>
-                <td>${grade.teacherName}</td>
-                <td>
-                    ${currentUser?.role === 'admin' || currentUser?.id === grade.teacherId ? 
-                      `<button class="edit-btn" data-id="${grade.id}">✏️</button>
-                       <button class="delete-btn" data-id="${grade.id}">🗑️</button>` : 
-                      ''}
-                </td>
-            `;
-            gradesList.appendChild(tr);
-        });
-    }
 
-    function renderSchedule() {
-        const classFilterValue = scheduleClassFilter.value;
-        const dayFilterValue = scheduleDayFilter.value;
-        
-        if (!classFilterValue) {
-            scheduleList.innerHTML = '<tr><td colspan="4">Выберите класс для просмотра расписания</td></tr>';
-            return;
+        function renderGrades() {
+            const classFilterValue = classFilter.value;
+            const subjectFilterValue = subjectFilter.value;
+            
+            let filteredGrades = [...grades];
+            
+            if (classFilterValue) {
+                filteredGrades = filteredGrades.filter(grade => {
+                    const student = students.find(s => s.id === grade.studentId);
+                    return student && student.class === classFilterValue;
+                });
+            }
+            
+            if (subjectFilterValue) {
+                filteredGrades = filteredGrades.filter(grade => grade.subject === subjectFilterValue);
+            }
+            
+            gradesList.innerHTML = '';
+            filteredGrades.forEach(grade => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${grade.studentName}</td>
+                    <td>${grade.subject}</td>
+                    <td>${grade.value}</td>
+                    <td>${grade.date}</td>
+                    <td>${grade.teacherName}</td>
+                    <td>
+                        ${currentUser?.role === 'admin' || currentUser?.id === grade.teacherId ? 
+                          `<button class="edit-btn" data-id="${grade.id}">✏️</button>
+                           <button class="delete-btn" data-id="${grade.id}">🗑️</button>` : 
+                          ''}
+                    </td>
+                `;
+                gradesList.appendChild(tr);
+            });
         }
-        
-        let filteredSchedule = schedule.filter(item => 
-            item.class === classFilterValue && item.day === parseInt(dayFilterValue)
-            .sort((a, b) => a.number - b.number);
-        
-        scheduleList.innerHTML = '';
-        
-        if (filteredSchedule.length === 0) {
-            scheduleList.innerHTML = '<tr><td colspan="4">Расписание для выбранного класса и дня не найдено</td></tr>';
-            return;
+
+        function renderSchedule() {
+            const classFilterValue = scheduleClassFilter.value;
+            const dayFilterValue = scheduleDayFilter.value;
+            
+            if (!classFilterValue) {
+                scheduleList.innerHTML = '<tr><td colspan="4">Выберите класс для просмотра расписания</td></tr>';
+                return;
+            }
+            
+            let filteredSchedule = schedule.filter(item => 
+                item.class === classFilterValue && item.day === parseInt(dayFilterValue)
+            ).sort((a, b) => a.number - b.number);
+            
+            scheduleList.innerHTML = '';
+            
+            if (filteredSchedule.length === 0) {
+                scheduleList.innerHTML = '<tr><td colspan="4">Расписание для выбранного класса и дня не найдено</td></tr>';
+                return;
+            }
+            
+            filteredSchedule.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${item.number}</td>
+                    <td>${item.subject}</td>
+                    <td>${item.teacher}</td>
+                    <td>${item.room}</td>
+                `;
+                scheduleList.appendChild(tr);
+            });
         }
-        
-        filteredSchedule.forEach(item => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${item.number}</td>
-                <td>${item.subject}</td>
-                <td>${item.teacher}</td>
-                <td>${item.room}</td>
-            `;
-            scheduleList.appendChild(tr);
-        });
-    }
 
-    function renderUsers() {
-        usersList.innerHTML = '';
-        users.forEach(user => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${user.id}</td>
-                <td>${user.username}</td>
-                <td>${getRoleName(user.role)}</td>
-                <td>
-                    <button class="edit-btn" data-id="${user.id}">✏️</button>
-                    ${user.id !== 1 ? `<button class="delete-btn" data-id="${user.id}">🗑️</button>` : ''}
-                </td>
-            `;
-            usersList.appendChild(tr);
-        });
-    }
-
-    function getRoleName(role) {
-        switch(role) {
-            case 'admin': return 'Администратор';
-            case 'teacher': return 'Учитель';
-            case 'student': return 'Ученик';
-            default: return role;
+        function renderUsers() {
+            usersList.innerHTML = '';
+            users.forEach(user => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.username}</td>
+                    <td>${getRoleName(user.role)}</td>
+                    <td>
+                        <button class="edit-btn" data-id="${user.id}">✏️</button>
+                        ${user.id !== 1 ? `<button class="delete-btn" data-id="${user.id}">🗑️</button>` : ''}
+                    </td>
+                `;
+                usersList.appendChild(tr);
+            });
         }
-    }
 
-    function updateStats() {
-        totalStudentsSpan.textContent = students.length;
-        totalTeachersSpan.textContent = teachers.length;
-        totalGradesSpan.textContent = grades.length;
-    }
-
-    function saveUsers() {
-        localStorage.setItem('users', JSON.stringify(users));
-    }
-
-    function saveStudents() {
-        localStorage.setItem('students', JSON.stringify(students));
-    }
-
-    function saveTeachers() {
-        localStorage.setItem('teachers', JSON.stringify(teachers));
-    }
-
-    function saveGrades() {
-        localStorage.setItem('grades', JSON.stringify(grades));
-    }
-
-    // Инициализация тестовых данных
-    function initTestData() {
-        if (students.length === 0) {
-            students = [
-                { id: 1, userId: 2, fullname: 'Иванов Иван Иванович', class: '5А', birthdate: '2012-05-15' },
-                { id: 2, userId: 3, fullname: 'Петров Петр Петрович', class: '5А', birthdate: '2012-07-22' },
-                { id: 3, userId: 4, fullname: 'Сидорова Мария Сергеевна', class: '6Б', birthdate: '2011-03-10' }
-            ];
-            saveStudents();
+        function getRoleName(role) {
+            switch(role) {
+                case 'admin': return 'Администратор';
+                case 'teacher': return 'Учитель';
+                case 'student': return 'Ученик';
+                default: return role;
+            }
         }
-        
-        if (teachers.length === 0) {
-            teachers = [
-                { id: 1, userId: 5, fullname: 'Смирнова Ольга Васильевна', subject: 'Математика', classTeacher: '5А' },
-                { id: 2, userId: 6, fullname: 'Кузнецов Андрей Николаевич', subject: 'Физика', classTeacher: '' }
-            ];
-            saveTeachers();
-        }
-        
-        if (grades.length === 0) {
-            grades = [
-                { id: 1, studentId: 1, studentName: 'Иванов Иван Иванович', subject: 'Математика', value: 5, date: '2023-09-10', teacherId: 1, teacherName: 'Смирнова Ольга Васильевна' },
-                { id: 2, studentId: 2, studentName: 'Петров Петр Петрович', subject: 'Математика', value: 4, date: '2023-09-10', teacherId: 1, teacherName: 'Смирнова Ольга Васильевна' },
-                { id: 3, studentId: 3, studentName: 'Сидорова Мария Сергеевна', subject: 'Физика', value: 5, date: '2023-09-12', teacherId: 2, teacherName: 'Кузнецов Андрей Николаевич' }
-            ];
-            saveGrades();
-        }
-        
-        if (schedule.length === 0) {
-            schedule = [
-                { id: 1, class: '5А', day: 1, number: 1, subject: 'Математика', teacher: 'Смирнова О.В.', room: '201' },
-                { id: 2, class: '5А', day: 1, number: 2, subject: 'Русский язык', teacher: 'Иванова И.И.', room: '105' },
-                { id: 3, class: '5А', day: 2, number: 1, subject: 'Физика', teacher: 'Кузнецов А.Н.', room: '301' }
-            ];
-            localStorage.setItem('schedule', JSON.stringify(schedule));
-        }
-        
-        if (users.length === 1) { // Только admin
-            users = [
-                adminUser,
-                { id: 2, username: 'student1', password: '123', role: 'student' },
-                { id: 3, username: 'student2', password: '123', role: 'student' },
-                { id: 4, username: 'student3', password: '123', role: 'student' },
-                { id: 5, username: 'teacher1', password: '123', role: 'teacher' },
-                { id: 6, username: 'teacher2', password: '123', role: 'teacher' }
-            ];
-            saveUsers();
-        }
-    }
 
-    // Инициализация тестовых данных (можно закомментировать после первого запуска)
-    initTestData();
-});
+        function updateStats() {
+            totalStudentsSpan.textContent = students.length;
+            totalTeachersSpan.textContent = teachers.length;
+            totalGradesSpan.textContent = grades.length;
+        }
+
+        function saveUsers() {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        function saveStudents() {
+            localStorage.setItem('students', JSON.stringify(students));
+        }
+
+        function saveTeachers() {
+            localStorage.setItem('teachers', JSON.stringify(teachers));
+        }
+
+        function saveGrades() {
+            localStorage.setItem('grades', JSON.stringify(grades));
+        }
+
+        // Инициализация тестовых данных
+        function initTestData() {
+            if (students.length === 0) {
+                students = [
+                    { id: 1, userId: 2, fullname: 'Иванов Иван Иванович', class: '5А', birthdate: '2012-05-15' },
+                    { id: 2, userId: 3, fullname: 'Петров Петр Петрович', class: '5А', birthdate: '2012-07-22' },
+                    { id: 3, userId: 4, fullname: 'Сидорова Мария Сергеевна', class: '6Б', birthdate: '2011-03-10' }
+                ];
+                saveStudents();
+            }
+            
+            if (teachers.length === 0) {
+                teachers = [
+                    { id: 1, userId: 5, fullname: 'Смирнова Ольга Васильевна', subject: 'Математика', classTeacher: '5А' },
+                    { id: 2, userId: 6, fullname: 'Кузнецов Андрей Николаевич', subject: 'Физика', classTeacher: '' }
+                ];
+                saveTeachers();
+            }
+            
+            if (grades.length === 0) {
+                grades = [
+                    { id: 1, studentId: 1, studentName: 'Иванов Иван Иванович', subject: 'Математика', value: 5, date: '2023-09-10', teacherId: 1, teacherName: 'Смирнова Ольга Васильевна' },
+                    { id: 2, studentId: 2, studentName: 'Петров Петр Петрович', subject: 'Математика', value: 4, date: '2023-09-10', teacherId: 1, teacherName: 'Смирнова Ольга Васильевна' },
+                    { id: 3, studentId: 3, studentName: 'Сидорова Мария Сергеевна', subject: 'Физика', value: 5, date: '2023-09-12', teacherId: 2, teacherName: 'Кузнецов Андрей Николаевич' }
+                ];
+                saveGrades();
+            }
+            
+            if (schedule.length === 0) {
+                schedule = [
+                    { id: 1, class: '5А', day: 1, number: 1, subject: 'Математика', teacher: 'Смирнова О.В.', room: '201' },
+                    { id: 2, class: '5А', day: 1, number: 2, subject: 'Русский язык', teacher: 'Иванова И.И.', room: '105' },
+                    { id: 3, class: '5А', day: 2, number: 1, subject: 'Физика', teacher: 'Кузнецов А.Н.', room: '301' }
+                ];
+                localStorage.setItem('schedule', JSON.stringify(schedule));
+            }
+            
+            if (users.length === 1) { // Только admin
+                users = [
+                    adminUser,
+                    { id: 2, username: 'student1', password: '123', role: 'student' },
+                    { id: 3, username: 'student2', password: '123', role: 'student' },
+                    { id: 4, username: 'student3', password: '123', role: 'student' },
+                    { id: 5, username: 'teacher1', password: '123', role: 'teacher' },
+                    { id: 6, username: 'teacher2', password: '123', role: 'teacher' }
+                ];
+                saveUsers();
+            }
+        }
+
+        // Инициализация тестовых данных (можно закомментировать после первого запуска)
+        initTestData();
+    });
     </script>
 </body>
 </html>
